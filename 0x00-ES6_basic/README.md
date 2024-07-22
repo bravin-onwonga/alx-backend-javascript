@@ -43,7 +43,7 @@ An ***ECMA Script*** is a standard for scripting languages including JS, JScript
 
 - Difference between a constant and a variable
 constant | variable
----------|-----------
+-------- | ----------
 Cannot be reasigned within the scope in which it is declared | Can be reassigned within the scope in which it is declared
 Declared using the ```const``` key word | Declared using the ```var``` or ```let``` keyword
 Must be initialized during declaration | Can be declared without being intiatialized
@@ -63,7 +63,20 @@ When a variable is declared in a block (```if...else```, ```while loop```, ```fu
 > console.log(x); // 10
 >
 
-### Arrow functions and function parameters default to them
+### Arrow functions and function parameters default
+- **Arrow functions**
+Arrow function allows for short syntax using it inplace of the ```function``` keyword. You can omit the curly brackets and ```return``` keyword only for function covering one line.
+
+> const fullname = (firstname, lastname) => (firstname + " " + lastname)
+
+- **Default Parameters**
+Default parameters have an initial value initialized to them incase the argument is not passed when calling the function. Using the example above:
+
+> const fullname = (firstname, lastname = "Doe") => (firstname + " " + lastname)
+
+In this case it the function is called with only the firstname it won't result in it being ```undefined```.
+
+## Rest and spread function parameters
 
 
 ### Files in this project
