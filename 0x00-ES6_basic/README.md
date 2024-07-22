@@ -3,6 +3,7 @@ Overview of the new standards introduced in the newer ES6 version.
 
 ## Key Points
 - **What ES6 is**
+
 An ***ECMA Script*** is a standard for scripting languages including JS, JScript and ActionScript. For JS it is used to ensure interoperability of web-pages across different web browsers and ***ECMA Script 6/ ECMA Script 2015*** is the latests version to be released.
 
 ### New Features
@@ -42,6 +43,7 @@ An ***ECMA Script*** is a standard for scripting languages including JS, JScript
 - JavaScript Modules
 
 - Difference between a constant and a variable
+
 constant | variable
 -------- | ----------
 Cannot be reasigned within the scope in which it is declared | Can be reassigned within the scope in which it is declared
@@ -77,6 +79,8 @@ Default parameters have an initial value initialized to them incase the argument
 In this case it the function is called with only the firstname it won't result in it being ```undefined```.
 
 ## Rest and spread function parameters
+
+## String templating in ES6
 
 
 ### Files in this project
