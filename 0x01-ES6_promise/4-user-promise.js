@@ -1,7 +1,9 @@
 export default function signUpUser(firstName, lastName) {
-  return new Promise((resolve, reject) => {
-    resolve(firstName);
-  }).catch((err) => {
-    return new Error;
-  })
+  const myObj = {
+    firstName,
+    lastName,
+  };
+  return new Promise((resolve) => {
+    resolve(myObj);
+  });
 }
