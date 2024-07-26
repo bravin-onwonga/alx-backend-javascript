@@ -1,8 +1,12 @@
 export default function createIteratorObject(report) {
-  for (const employeeList in report['allEmployees']) {
-    for (const department in employeeList) {
-      console.log(employeeList[department]);
+  const myarr = [];
+
+  for (const department in report.allEmployees) {
+    if (department in report.allEmployees) {
+      for (const name of report.allEmployees[department]) {
+        myarr.push(name);
+      }
     }
   }
-  return;
+  return myarr;
 }
