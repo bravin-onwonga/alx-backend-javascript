@@ -1,6 +1,10 @@
 export default function cleanSet(set, startString) {
   let myStr = '';
 
+  if (!(set instanceof Set) || !Array.isArray([...set])) {
+    return myStr;
+  }
+
   if (startString.length === 0 || (typeof startString !== 'string')) {
     return myStr;
   }
