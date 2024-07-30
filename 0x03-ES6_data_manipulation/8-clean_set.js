@@ -5,7 +5,7 @@ export default function cleanSet(set, startString) {
     return myStr;
   }
 
-  if (startString.length === 0 || (typeof startString !== 'string')) {
+  if ((typeof startString !== 'string' || startString.length === 0)) {
     return myStr;
   }
 
