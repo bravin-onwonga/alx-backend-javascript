@@ -1,3 +1,3 @@
-export default function hasValuesFromArray(mySet, myArr) {
-  return new Set(myArr).isSubsetOf(mySet);
+export default function hasValuesFromArray(set, array) {
+  return new Set(array).isSubsetOf(set);
 }
