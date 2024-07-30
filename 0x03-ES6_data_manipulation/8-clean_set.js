@@ -9,7 +9,7 @@ export default function cleanSet(set, startString) {
     if (element.startsWith(startString)) {
       const ele = element.slice(startString.length);
       if (myStr.length !== 0) {
-        myStr += '-' + ele;
+        myStr += `-${ele}`;
       } else {
         myStr += ele;
       }
