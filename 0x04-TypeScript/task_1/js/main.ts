@@ -49,3 +49,5 @@ class StudentClass implements studentClassInterface {
 }
 
 const studentConstructor: studentClassInterfaceConstructor = StudentClass;
+
+export { printTeacher, StudentClass };
