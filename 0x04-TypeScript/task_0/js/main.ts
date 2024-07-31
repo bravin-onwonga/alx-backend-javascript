@@ -19,7 +19,7 @@ const student2: Student = {
   location: 'Addis Ababa',
 }
 
-const studentsList = [student1, student2];
+const studentsList: student[] = [student1, student2];
 
 const headers = ['name', 'location']
 
