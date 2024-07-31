@@ -48,3 +48,23 @@ const createEmployee: createEmployeeInterface = (salary: string | number) => {
   }
   return new Director();
 }
+
+interface isDirectorInterface {
+  (employee: Director | Teacher): boolean;
+}
+
+const isDirector: isDirectorInterface = (employee: Director | Teacher): boolean => {
+  return employee instanceof Director;
+}
+
+interface executeWorkInterface {
+  (employee: Director | Teacher): string;
+}
+
+const executeWork: executeWorkInterface = (employee: Director | Teacher): string => {
+  if (employee instanceof Director) {
+    return employee.workDirectorTasks();
+  } else if (employee instanceof Teacher) {
+    return employee.workTeacherTasks();
+  }
+}
