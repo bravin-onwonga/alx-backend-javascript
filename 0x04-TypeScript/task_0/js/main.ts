@@ -21,18 +21,7 @@ const student2: Student = {
 
 const studentsList = [student1, student2];
 
-const headers = ['name', 'location']
-
 var table = document.createElement('table');
-
-for (const header of headers) {
-  const tr = document.createElement('tr');
-  table.appendChild(tr);
-  const th = document.createElement("th");
-  let text = document.createTextNode(header);
-  th.appendChild(text);
-  tr.appendChild(th);
-}
 
 const body = table.createTBody();
 
