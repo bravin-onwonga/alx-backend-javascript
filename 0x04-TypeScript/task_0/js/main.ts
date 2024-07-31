@@ -51,3 +51,5 @@ studentsList.forEach(function (student) {
   tr.appendChild(tdName);
   tr.appendChild(tdLocation);
 });
+
+document.body.appendChild(table);
