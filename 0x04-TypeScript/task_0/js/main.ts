@@ -19,14 +19,13 @@ const student2: Student = {
   location: 'Addis Ababa',
 }
 
-const studentsList: student[] = [student1, student2];
+const studentsList = [student1, student2];
 
 const headers = ['name', 'location']
 
 var table = document.createElement('table');
-document.body.appendChild(table);
 
-for (const header in headers) {
+for (const header of headers) {
   const tr = document.createElement('tr');
   table.appendChild(tr);
   const th = document.createElement("th");
