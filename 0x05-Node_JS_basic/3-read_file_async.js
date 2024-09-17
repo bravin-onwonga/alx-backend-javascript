@@ -28,7 +28,6 @@ const countStudents = async (filename) => {
       }
     });
   }
-  return;
 };
 
 module.exports = countStudents;
