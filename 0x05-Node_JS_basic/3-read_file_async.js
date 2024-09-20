@@ -15,21 +15,24 @@ const countStudents = async (filename) => {
         } else {
           myObj[course] = [studentDetails[0]];
         }
-        i++;
+        i += 1;
       }
       let numberOfStudents = 0;
       for (const element in myObj) {
-        numberOfStudents = numberOfStudents + myObj[element].length;
+        if (element) {
+          numberOfStudents += myObj[element].length;
+        }
       }
-      console.log('Number of students: ' + numberOfStudents);
+      console.log(`Number of students: ${numberOfStudents}`);
       for (const ele in myObj) {
-        const studentsInCourse = myObj[ele].length;
-        console.log(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}`);
+        if (ele) {
+          const studentsInCourse = myObj[ele].length;
+          console.log(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}`);
+        }
       }
-    }
-    catch (err) {
+    } catch (err) {
       throw new Error('Cannot load the database');
-    };
+    }
   } else {
     throw new Error('Cannot load the database');
   }
