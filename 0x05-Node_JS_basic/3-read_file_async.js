@@ -1,9 +1,9 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 
 const countStudents = async (filename) => {
-  if (filename !== null) {
-    fs.readFile(filename, 'utf8', (err, data) => {
-      if (err) throw new Error('Cannot load the database');
+  if (filename) {
+    try {
+      const data = await fs.readFile(filename, 'utf-8');
       const arr = Array.from(data.split('\n'));
       let i = 1;
       const myObj = {};
@@ -26,7 +26,12 @@ const countStudents = async (filename) => {
         const studentsInCourse = myObj[ele].length;
         console.log(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}`);
       }
-    });
+    }
+    catch (err) {
+      throw new Error('Cannot load the database');
+    };
+  } else {
+    throw new Error('Cannot load the database');
   }
 };
 

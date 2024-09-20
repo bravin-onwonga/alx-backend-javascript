@@ -35,6 +35,7 @@ const countStudents = (filename) => {
       }
     }
   } catch (err) {
+    console.log(err);
     throw new Error('Cannot load the database');
   }
 };
