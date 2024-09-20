@@ -12,8 +12,7 @@ const app = http.createServer((req, res) => {
   const { url } = req;
 
   if (url === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
+    res.end('Hello Holberton School!');
   }
 
   if (url === '/students') {
@@ -47,9 +46,11 @@ const app = http.createServer((req, res) => {
           for (const ele in myObj) {
             if (ele) {
               const studentsInCourse = myObj[ele].length;
+              res.write(studentsInCourse);
               if (idx < myObj.length - 1) {
                 res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}\n`);
               } else {
+                res.write(idx);
                 res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}`);
               }
               idx += 1;
@@ -57,9 +58,11 @@ const app = http.createServer((req, res) => {
           }
           res.end();
         } catch (err) {
+          res.statusCode = 500;
           res.end('Cannot load the database');
         }
       } else {
+        res.statusCode = 500;
         res.end('Cannot load the database');
       }
     };
