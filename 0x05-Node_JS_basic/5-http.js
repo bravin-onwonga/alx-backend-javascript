@@ -1,5 +1,5 @@
 const http = require('http');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 const hostname = 'localhost';
 const port = 1245;
@@ -9,21 +9,19 @@ const app = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
 
-  const url = req.url;
+  const { url } = req;
 
   if (url === '/') {
     res.end('Hello Holberton School!');
   }
 
   if (url === '/students') {
-    res.write('This is the list of our students');
+    res.write('This is the list of our students\n');
 
     const countStudents = async (filename) => {
-      if (filename !== null) {
-        fs.readFile(filename, 'utf8', (err, data) => {
-          if (err) {
-            throw new Error('Cannot load the database');
-          }
+      if (filename) {
+        try {
+          const data = await fs.readFile(filename, 'utf-8');
           const arr = Array.from(data.split('\n'));
           let i = 1;
           const myObj = {};
@@ -35,19 +33,33 @@ const app = http.createServer((req, res) => {
             } else {
               myObj[course] = [studentDetails[0]];
             }
-            i++;
+            i += 1;
           }
           let numberOfStudents = 0;
           for (const element in myObj) {
-            numberOfStudents = numberOfStudents + myObj[element].length;
+            if (element) {
+              numberOfStudents += myObj[element].length;
+            }
           }
           res.write(`Number of students: ${numberOfStudents}\n`);
+          let idx = 0;
           for (const ele in myObj) {
-            const studentsInCourse = myObj[ele].length;
-            res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}\n`);
+            if (ele) {
+              const studentsInCourse = myObj[ele].length;
+              if (idx < myObj.length - 1) {
+                res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}\n`);
+              } else {
+                res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}`);
+              }
+              idx += 1;
+            }
           }
           res.end();
-        });
+        } catch (err) {
+          res.end('Cannot load the database');
+        }
+      } else {
+        res.end('Cannot load the database');
       }
     };
     countStudents(filename);
