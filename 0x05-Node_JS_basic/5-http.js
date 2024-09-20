@@ -42,18 +42,10 @@ const app = http.createServer((req, res) => {
             }
           }
           res.write(`Number of students: ${numberOfStudents}\n`);
-          let idx = 0;
           for (const ele in myObj) {
             if (ele) {
               const studentsInCourse = myObj[ele].length;
-              res.write(studentsInCourse);
-              if (idx < myObj.length - 1) {
-                res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}\n`);
-              } else {
-                res.write(idx);
-                res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}`);
-              }
-              idx += 1;
+              res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}\n`);
             }
           }
           res.end();

@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 const port = 1245;
 const filename = process.argv[2];
@@ -14,11 +14,9 @@ app.get('/students', (req, res) => {
   res.write('This is the list of our students\n');
 
   const countStudents = async (filename) => {
-    if (filename !== null) {
-      fs.readFile(filename, 'utf8', (err, data) => {
-        if (err) {
-          throw new Error('Cannot load the database');
-        }
+    if (filename) {
+      try {
+        const data = await fs.readFile(filename, 'utf-8');
         const arr = Array.from(data.split('\n'));
         let i = 1;
         const myObj = {};
@@ -30,19 +28,29 @@ app.get('/students', (req, res) => {
           } else {
             myObj[course] = [studentDetails[0]];
           }
-          i++;
+          i += 1;
         }
         let numberOfStudents = 0;
         for (const element in myObj) {
-          numberOfStudents = numberOfStudents + myObj[element].length;
+          if (element) {
+            numberOfStudents += myObj[element].length;
+          }
         }
         res.write(`Number of students: ${numberOfStudents}\n`);
         for (const ele in myObj) {
-          const studentsInCourse = myObj[ele].length;
-          res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}`);
+          if (ele) {
+            const studentsInCourse = myObj[ele].length;
+            res.write(`Number of students in ${ele}: ${studentsInCourse}. List: ${myObj[ele].join(', ')}\n`);
+          }
         }
         res.end();
-      });
+      } catch (err) {
+        res.statusCode = 500;
+        res.end('Cannot load the database');
+      }
+    } else {
+      res.statusCode = 500;
+      res.end('Cannot load the database');
     }
   };
   countStudents(filename);
