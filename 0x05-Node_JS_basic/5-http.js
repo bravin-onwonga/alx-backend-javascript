@@ -12,7 +12,8 @@ const app = http.createServer((req, res) => {
   const { url } = req;
 
   if (url === '/') {
-    res.end('Hello Holberton School!');
+    res.write('Hello Holberton School!');
+    res.end();
   }
 
   if (url === '/students') {
