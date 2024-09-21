@@ -1,11 +1,11 @@
 {
     "presets": [
         [
-            "@babel/preset-env",
+            "env",
             {
-                "targets": {
-                    "node": "12.22.9"
-                }
+                "exclude": [
+                    "transform-regenerator"
+                ]
             }
         ]
     ]
