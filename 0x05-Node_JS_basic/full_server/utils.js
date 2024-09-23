@@ -1,5 +1,3 @@
-const res = require("express/lib/response");
-
 const filename = 'database.csv';
 
 export const readDatabase = () => {
@@ -7,7 +5,7 @@ export const readDatabase = () => {
     if (filename !== null) {
       fs.readFile(filename, 'utf8', (err, data) => {
         if (err) {
-          return ({'error': 'Cannot load the database'});
+          return ({ 'error': 'Cannot load the database' });
         }
         const arr = Array.from(data.split('\n'));
         let i = 1;
@@ -27,7 +25,7 @@ export const readDatabase = () => {
           numberOfStudents = numberOfStudents + myObj[element].length;
         }
 
-        return({'success': [myObj, numberOfStudents]});
+        return ({ 'success': [myObj, numberOfStudents] });
       });
     }
   }
