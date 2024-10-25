@@ -1,5 +1,7 @@
-export default class AppController {
-  getHomepage(res, req) {
+class AppController {
+  static getHomepage(req, res) {
     return res.status(200).send('Hello Holberton School!');
   }
 }
+
+module.exports = AppController;

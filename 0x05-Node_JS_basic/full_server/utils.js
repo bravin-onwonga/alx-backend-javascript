@@ -1,33 +1,23 @@
-const filename = 'database.csv';
 
-export const readDatabase = () => {
-  const countStudents = async (filename) => {
-    if (filename !== null) {
-      fs.readFile(filename, 'utf8', (err, data) => {
-        if (err) {
-          return ({ 'error': 'Cannot load the database' });
-        }
-        const arr = Array.from(data.split('\n'));
-        let i = 1;
-        const myObj = {};
-        while (arr[i]) {
-          const studentDetails = Array.from(arr[i].split(','));
-          const course = studentDetails[3];
-          if (myObj[course]) {
-            myObj[course].push(studentDetails[0]);
-          } else {
-            myObj[course] = [studentDetails[0]];
-          }
-          i++;
-        }
-        let numberOfStudents = 0;
-        for (const element in myObj) {
-          numberOfStudents = numberOfStudents + myObj[element].length;
-        }
+const fs = require('fs');
 
-        return ({ 'success': [myObj, numberOfStudents] });
-      });
-    }
-  }
-  countStudents(filename);
-}
+const aggregate = (data) => data.slice(1).reduce(
+  (a, b) => {
+    const [first, , , field] = b.split(',');
+    if (field === 'CS') {
+      a.cs.push(first);
+    } else if (field === 'SWE') a.swe.push(first);
+    return a;
+  },
+  { cs: [], swe: [] },
+);
+
+const readDatabase = (path) => new Promise((resolve, reject) => {
+  fs.readFile(path, 'utf-8', (err, res) => {
+    if (err) return reject(new Error('Cannot load the database'));
+    return resolve(aggregate(res.split('\n')));
+  });
+});
+
+module.exports = readDatabase;
+
