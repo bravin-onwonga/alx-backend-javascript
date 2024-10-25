@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 
 const aggregate = (data) => data.slice(1).reduce(
@@ -20,4 +19,3 @@ const readDatabase = (path) => new Promise((resolve, reject) => {
 });
 
 module.exports = readDatabase;
-
