@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const app = express();
-const PORT = 7865;
+const port = 7865;
 
 app.get('/', (req, res) => res.end('Welcome to the payment system'))
 app.get('/cart/:id([0-9]+)', (req, res) => {
@@ -19,4 +19,5 @@ app.get('/available_payments', (req, res) => {
 app.post('/login', (req, res) => {
   res.end(`Welcome ${req.body.userName}`);
 });
-app.listen(PORT, () => console.log(`API running on port: ${PORT}`));
+
+app.listen(port, () => console.log(`API available on localhost port ${port}`));
